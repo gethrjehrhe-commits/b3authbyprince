@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: bt-checker
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn bt_checker:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    envVars:
+      - key: BT_SITE
+        value: https://altairtech.io
+      - key: BT_MERCHANT_ID
+        value: 85fhvjhhq6j2xhk8
+      - key: BT_TIMEOUT
+        value: "25"
+      - key: BT_JWT
+        sync: false         # set manually in dashboard (secret)
+      - key: BT_WP_COOKIE_VALUE
+        sync: false         # set manually in dashboard (secret)
+      - key: BT_PROXY
+        sync: false         # optional
